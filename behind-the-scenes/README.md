@@ -1,6 +1,11 @@
-#
+## What I have learned:
 
-## File 'scope.js'. What I learned:
+- [Scope](#scope)
+- [Hoisting and TDZ](#hoisting)
+
+## Scope
+
+### What I learned:
 
 - Scoping asks the question “Where do variables live?” or “Where can we access a certain variable, and where not?”.
 - There are 3 types of scope in JavaScript: the global scope, scopes defined by functions, and scopes defined by blocks.
@@ -13,7 +18,9 @@
 
 #
 
-## File 'hoisting_and_TDZ.js'. What I learned:
+## Hoisting
+
+### What I learned:
 
 - Hoisting: Makes some types of variables accessible/usable in the code before they are actually declared. “Variables lifted to the top of their scope”.
 - Before execution, code is scanned for variable declarations, and for each variable, a new property is created in the variable environment object.
