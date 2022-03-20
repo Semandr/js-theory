@@ -2,6 +2,7 @@
 
 - [Scope](#scope)
 - [Hoisting and TDZ](#hoisting)
+- ['this' keyword](#this)
 
 ## Scope
 
@@ -26,9 +27,23 @@
 - Before execution, code is scanned for variable declarations, and for each variable, a new property is created in the variable environment object.
 - TDZ: Makes it easier to avoid and catch errors: accessing variables before declaration is bad practice and should be avoided.
 - Makes const variables actually work.
-- NEVER use 'var' and use const or let.
+- NEVER use 'var'! But only 'const' or 'let'.
 - First we need to declare varible and after use it.
 - Call and use function after declaration.
 - Const and led variables do not create properties in global Window object, such as 'var'.
 
 #
+
+## this
+
+### What I learned:
+
+- **this** keyword: Special variable that is created for every execution context (every function). Takes the value of (points to) the “owner” of the function in which the this keyword is used.
+- **this** is NOT static. It depends on how the function is called, and its value is only assigned when the function is actually called.
+
+#### **this** is very dinamic:
+
+- **As Method** _this_ = Object that is calling the method
+- **Simple function call** _this_ = undefined
+- **Arrow functions** _this_ = _this_ of surrounding function (lexical _this_)
+- **Event listener** _this_ = DOM element that the handler is attached to
