@@ -18,3 +18,16 @@
 - The scope chain has nothing to do with the order in which functions were called. It does not affect the scope chain at all.
 
 #
+
+## File 'hoisting_and_TDZ.js'. What I learned:
+
+- Hoisting: Makes some types of variables accessible/usable in the code before they are actually declared. “Variables lifted to the top of their scope”.
+- Before execution, code is scanned for variable declarations, and for each variable, a new property is created in the variable environment object.
+- TDZ: Makes it easier to avoid and catch errors: accessing variables before declaration is bad practice and should be avoided.
+- Makes const variables actually work.
+- NEVER use 'var' and use const or let.
+- First we need to declare varible and after use it.
+- Call and use function after declaration.
+- Const and led variables do not create properties in global Window object, such as 'var'.
+
+#
