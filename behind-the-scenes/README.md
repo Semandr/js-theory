@@ -3,6 +3,7 @@
 - [Scope](#scope)
 - [Hoisting and TDZ](#hoisting)
 - ['this' keyword](#this)
+- [Difference between regular and arrow functions](#functions)
 
 ## Scope
 
@@ -47,3 +48,12 @@
 - **Simple function call** _this_ = undefined
 - **Arrow functions** _this_ = _this_ of surrounding function (lexical _this_)
 - **Event listener** _this_ = DOM element that the handler is attached to
+
+#
+
+## Functions
+
+### What I learned:
+
+- Good coding practice is to never use an arrow function as a method.
+- The keyword "Arguments" - an array-like object exists only for regular functions, arrow functions do not have it, it is undefined there.
