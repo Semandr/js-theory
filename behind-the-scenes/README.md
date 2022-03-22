@@ -4,6 +4,7 @@
 - [Hoisting and TDZ](#hoisting)
 - ['this' keyword](#this)
 - [Difference between regular and arrow functions](#functions)
+- [Primitives vs. Objects](#primitives-vs-objects)
 
 ## Scope
 
@@ -57,3 +58,14 @@
 
 - Good coding practice is to never use an arrow function as a method.
 - The keyword "Arguments" - an array-like object exists only for regular functions, arrow functions do not have it, it is undefined there.
+
+#
+
+## Primitives-vs-Objects
+
+### What I learned:
+
+- Primitive values are simply primitive types that store all the data in that part of the JavaScript engine called the "Call stack". This process consists of three parts: an identifier, a memory address, and the value itself.
+- Any objects are a reference data type. The data of these objects is stored in the "Heap" of the JavaScript engine.
+- Only the name of the object is stored on the Call stack, and its value points to an address on the Heap.
+- JS has a function for copying objects like **Object.assign()**, but it only copies the first level of values. If there is an object inside an object, it will not be copied, but will point to the same content on the Heap as before. For deep cloning, we are need to use external libraries.
