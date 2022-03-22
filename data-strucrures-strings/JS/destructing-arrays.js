@@ -26,4 +26,39 @@ const restaurant = {
       close: 24,
     },
   },
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
 };
+
+// DESTRUCTURING ARRAY
+const arr = [2, 3, 4];
+const [x, y, z] = arr;
+console.log(x, y, z);
+
+// const [first, second] = restaurant.categories; // It is take only two first elements from original array
+// const [first, , third] = restaurant.categories; // It is take only first element and third from original array
+let [main, , secondary] = restaurant.categories; // It is take only first element and third from original array
+console.log(main, secondary);
+[main, secondary] = [secondary, main]; // switch the variables
+console.log(main, secondary); // variables are switched
+
+// Destructuring using method 'order'
+restaurant.order(2, 0); // here we recive an array with 2 el of mainMenu and 0 (first) element of mainMenu
+// Doing destructuring
+const [starter, mainCourse] = restaurant.order(2, 0);
+console.log(`${starter} and ${mainCourse}`); // 'Garlic Bread and Pizza
+
+const nested = [2, 4, [5, 6]];
+// const [i, , j] = nested;
+// console.log(i, j); // number '2' and array [5, 6]
+const [i, , [j, k]] = nested; // destructuring inside of destructuring
+console.log(i, j, k); // three separate varibales = 2, 5 and 6
+
+// Default values:
+// const [p, q, r] = [8, 9];
+// console.log(p, q, r); // r = undefined
+
+const [p = 1, q = 1, r = 1] = [8, 9];
+console.log(p, q, r); // output 8, 9 and 1 ! Because there '1' is a defaul value from unexisting elements
+// this is can be useful when we can gat some data from API
