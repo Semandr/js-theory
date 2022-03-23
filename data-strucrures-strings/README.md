@@ -1,6 +1,6 @@
 ## What I have learned in this section of the JS theory:
 
-[Destructing Arrays](#destructing-arrays)
+- [Destructing Arrays](#destructing-arrays)
 
 ## Destructing-arrays
 
@@ -11,3 +11,5 @@
 - Destructing by using method of object
 - Destructing nested arrays
 - Assigment default values during destructing for unexisting variables
+
+#
