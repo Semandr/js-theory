@@ -1,6 +1,5 @@
 'use strict';
 
-// Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
@@ -25,4 +24,56 @@ const restaurant = {
   order: function (starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
 };
+
+// DESTRUCTURING OBJECTS
+// **********************************
+const { name, categories, openingHours } = restaurant;
+console.log(name, openingHours, categories);
+
+// Change names of variables:
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+console.log(restaurantName, hours, tags);
+
+// Set default values:
+const { menu = [], starterMenu: starters = [] } = restaurant;
+console.log(menu, starters);
+
+// Mutating variables:
+let a = 111;
+let b = 999;
+const obj = { a: 23, b: 7, c: 14 };
+({ a, b } = obj);
+console.log(a, b); // a = 23, not 111 anymore and b = 7
+
+// Nested objects
+// Destucturing nested obj with new names
+const {
+  fri: { open: apre, close: chiude },
+} = openingHours;
+console.log(apre, chiude); // 11 and 23
+
+// Pratical examples
+restaurant.orderDelivery({
+  time: '22:30',
+  address: 'Via del Vento, 25',
+  mainIndex: 2,
+  starterIndex: 2,
+});
+
+// Here will been used defaul function values from object
+restaurant.orderDelivery({ address: 'Via del Sole, 5', starterIndex: 1 });
