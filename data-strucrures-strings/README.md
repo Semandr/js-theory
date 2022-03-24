@@ -3,6 +3,7 @@
 - [Destructuring Arrays](#destructing-arrays)
 - [Destructuring Objects](#destructuring-objects)
 - [Spread Operator (...)](#spread)
+- [Rest Operator (...)](#rest)
 
 ## Destructing-arrays
 
@@ -34,3 +35,15 @@
 - Use spread operator when we pass arguments into a function
 - Copy array, creating a shallow copy, join two arrays
 - Make a shallow copy of object using Spread operator (ES2020)
+
+#
+
+## Rest
+
+### What I learned:
+
+- Rest parameter it has the same syntax with the three dots but it actually does the opposite of the spread operator.
+- The rest pattern uses the exact same syntax however, to collect multiple elements and condense them into an array or object.
+- Rest pattern basically collects the elements that are unused in the destructuring assignment.
+- Rest pattern always must be the last in the destructuring assignment
+- Rest parameter we can use as function argument
