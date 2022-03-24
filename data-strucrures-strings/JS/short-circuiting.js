@@ -48,14 +48,7 @@ console.log(5 || 'Mario'); // 5
 console.log('' || 'Mario'); // 'Mario'
 console.log(true || 0); // true
 console.log(undefined || null); // null
-
-restaurant.numGuest = 0;
-const guest1 = restaurant.numGuest ? restaurant : 10;
-console.log(guest1);
-
-const guest2 = restaurant.numGuest || 10;
-console.log(guest2);
-
+//
 console.log('------ AND ------');
 console.log(0 && 'Mark'); // 0
 console.log(7 && 'Mark'); // Mark
@@ -66,3 +59,14 @@ if (restaurant.orderPizza) {
 }
 
 restaurant.orderPizza && restaurant.orderPizza('spinach');
+
+// Nullish coalescing operator (??)
+// ================================
+console.log('----- Nullish Operator -----');
+//
+restaurant.numGuest = 0;
+const guest = restaurant.numGuest || 10;
+console.log(guest); // 10
+//
+const guestCorrect = restaurant.numGuest ?? 10;
+console.log(guestCorrect); // 0
