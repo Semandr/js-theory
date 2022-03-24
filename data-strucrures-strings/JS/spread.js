@@ -68,13 +68,13 @@ const letters = [...str, ' ', 'R.'];
 console.log(letters);
 
 // Real-world exapmle
-// const ingredients = [
-//   prompt(`Let's make pasta! Ingredient 1?`),
-//   prompt(`Ingredient 2?`),
-//   prompt(`Ingredient 3?`),
-// ];
+const ingredients = [
+  prompt(`Let's make pasta! Ingredient 1?`),
+  prompt(`Ingredient 2?`),
+  prompt(`Ingredient 3?`),
+];
 
-// restaurant.orderPasta(...ingredients);
+restaurant.orderPasta(...ingredients);
 
 // Objects ES2020
 const newRestaurant = {

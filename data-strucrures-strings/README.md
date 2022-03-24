@@ -2,6 +2,7 @@
 
 - [Destructuring Arrays](#destructing-arrays)
 - [Destructuring Objects](#destructuring-objects)
+- [Spread Operator (...)](#spread)
 
 ## Destructing-arrays
 
@@ -22,3 +23,14 @@
 - How to destructuring objects and nested objects
 - How to change the names and mutate variables during destructuring and set default values
 - Creation of function that destructuring object immediately with default parametrs
+
+#
+
+## Spread
+
+### What I learned:
+
+- The spread operator can be used to unpack an array or any iterable variable into individual elements
+- Use spread operator when we pass arguments into a function
+- Copy array, creating a shallow copy, join two arrays
+- Make a shallow copy of object using Spread operator (ES2020)
