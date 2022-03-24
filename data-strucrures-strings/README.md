@@ -4,6 +4,7 @@
 - [Destructuring Objects](#destructuring-objects)
 - [Spread Operator (...)](#spread)
 - [Rest Operator (...)](#rest)
+- [Short Circuiting (&& and ||)](#short-circuiting)
 
 ## Destructing-arrays
 
@@ -48,3 +49,12 @@
 - Rest pattern basically collects the elements that are unused in the destructuring assignment.
 - Rest pattern always must be the last in the destructuring assignment
 - Rest parameter we can use as function argument
+
+#
+
+## Short-circuiting
+
+### What I learned:
+
+- **||** If the first value is true, then it will be returned immediately. The rest of the values will not even be considered.
+- **&&** This "short circuit" works in exactly the opposite way. Returns the first false value and stops. If all values are false, then the last false value will be returned.
