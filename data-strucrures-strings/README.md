@@ -44,6 +44,7 @@
 
 - Rest parameter it has the same syntax with the three dots but it actually does the opposite of the spread operator.
 - The rest pattern uses the exact same syntax however, to collect multiple elements and condense them into an array or object.
+- Rest syntax is on the LEFT side of the assignment operator
 - Rest pattern basically collects the elements that are unused in the destructuring assignment.
 - Rest pattern always must be the last in the destructuring assignment
 - Rest parameter we can use as function argument
