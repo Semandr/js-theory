@@ -40,3 +40,23 @@ const restaurant = {
     );
   },
 };
+
+// OPTIONAL CHAINING
+// --------------------------------
+console.log(restaurant.openingHours?.mon?.open);
+
+// EXAMPLE
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+// METHODS
+console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+
+// ARRAYS
+const users = [{ name: 'Andriy', email: 'hello@andriy.io' }];
+console.log(users[0]?.name ?? 'User array is empty');
