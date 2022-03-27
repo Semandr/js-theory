@@ -6,6 +6,7 @@
 - [Rest Operator (...)](#rest)
 - [Short Circuiting (&& and ||)](#short-circuiting)
 - [Sets](#sets)
+- [Maps](#maps)
 
 ## Destructing-arrays
 
@@ -70,3 +71,16 @@
 - The order of elements in the set is irrelevant
 - In sets there are actually no indexes
 - Set is iterable
+
+#
+
+## Maps
+
+### What I learned:
+
+- The Map object holds key-value pairs and remembers the original insertion order of the keys
+- The big difference between objects and maps is that in maps, the keys can have any type of data
+- Maps methods can use chaining
+- How to convert object into map (new Map(Object.entries()))
+- Iteration. For...of loop is available for maps
+- How to convert Map to array using Spread operator ([...map(entries())])
