@@ -43,3 +43,42 @@ const restaurant = {
 
 // MAPS (iterations)
 // --------------------------------
+
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct 👍🏻'],
+  [false, 'Try again'],
+]);
+console.log(question);
+// This is similar to
+console.log(Object.entries(openingHours));
+
+// Convert object to map
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap); // similar to array of arrays, Map
+
+// Iteration. For...of loop is available for maps
+// Quiz app:
+// Log to console question itself
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+const answer = Number(prompt('Your answer: '));
+if (answer === 3) {
+  console.log(question.get(true));
+} else {
+  console.log(question.get(false));
+}
+// Or
+console.log(question.get(question.get('correct') === answer));
+
+// Convert Map to array
+// console.log([...question]) === console.log([...question.entries()]);
+console.log([...question.entries()]);
+console.log([...question.keys()]);
+console.log([...question.values()]);
