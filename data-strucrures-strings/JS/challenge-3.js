@@ -17,7 +17,7 @@ const gameEvents = new Map([
 // Tasks:
 
 // 1. Create an array 'events' of the different game events that happened (no duplicates)
-const events = new Set([...gameEvents.values()]);
+const events = [...new Set(gameEvents.values())];
 console.log(events);
 
 // 2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
@@ -33,5 +33,5 @@ console.log(
 );
 
 // 4. Loop over 'gameEvents' and log each element to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this: [FIRST HALF] 17: ⚽   GOAL
-for (const [key, value] of [...gameEvents])
+for (const [key, value] of gameEvents)
   console.log(`[${key <= 45 ? 'FIRST' : 'SECOND'} HALF] ${key}: ${value}`);
