@@ -5,6 +5,7 @@
 - [Spread Operator (...)](#spread)
 - [Rest Operator (...)](#rest)
 - [Short Circuiting (&& and ||)](#short-circuiting)
+- [Sets](#sets)
 
 ## Destructing-arrays
 
@@ -58,3 +59,14 @@
 
 - **||** If the first value is true, then it will be returned immediately. The rest of the values will not even be considered.
 - **&&** This "short circuit" works in exactly the opposite way. Returns the first false value and stops. If all values are false, then the last false value will be returned.
+
+#
+
+## Sets
+
+### What I learned:
+
+- Set is basically just a collection of unique values
+- The order of elements in the set is irrelevant
+- In sets there are actually no indexes
+- Set is iterable
