@@ -2,7 +2,7 @@
 
 - [Default parameters](#default-parametrs)
 - [High-order functions](#high-order)
-- [Callback functions])(#callback)
+- [Callback functions](#callback)
 
 #
 
