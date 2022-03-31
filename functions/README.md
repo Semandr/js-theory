@@ -3,6 +3,7 @@
 - [Default parameters](#default-parametrs)
 - [High-order functions](#high-order)
 - [Callback functions](#callback)
+- [Closures](#closures)
 
 #
 
@@ -28,3 +29,13 @@
 
 - One of the main advantages of using callbacks is that we can split our code into many reusable and related parts.
 - Callback functions allow us to create abstractions in this way. They create another level of abstraction. Using them, we can focus on solving the main task, abstracting from the details.
+
+## Closures
+
+### What I learned:
+
+- A function has access to the variable environment (VE) of the execution context in which it was created.
+- **Closure**: VE attached to the function, exactly as it was at the time and place the function was created
+- A closure is the closed-over variable environment of the execution context in which a function was created, even after that execution context is gone!
+- A closure gives a function access to all the variables of its parent function,even after that parent function hasreturned.The function keeps a reference to its outer scope, which preserves the scope chain throughout time.
+- A closure makes sure that a function doesn’t loose connection to variables that existed at the function’s birth place.
