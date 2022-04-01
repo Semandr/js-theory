@@ -78,6 +78,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // SLICE METHOD - NOT mutate original array
 
+/*
 let arr = ['a', 'b', 'c', 'd', 'e'];
 console.log(arr.slice(2)); // ['c', 'd', 'e']
 console.log(arr.slice(2, 4)); // ['c', 'd']
@@ -113,3 +114,19 @@ console.log(letters.join(', '));
 console.log(letters);
 let numbers = [1, 2, 3];
 console.log(numbers.join(' ')); // STRING '1 2 3'
+*/
+
+/////////////////////////////////////////////////
+// AT METHOD
+// This method work also with strings!
+const arr = [23, 11, 64];
+console.log(arr[0]); // 23
+console.log(arr.at(0)); // 23
+
+// Last element from the array
+console.log(arr[arr.length - 1]); // 64
+console.log(arr.slice(-1)[0]); // 64
+console.log(arr.at(-1)); // 64
+
+// Strings!
+console.log('Marco'.at(0)); // 'M'
