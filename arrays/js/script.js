@@ -114,10 +114,12 @@ console.log(letters.join(', '));
 console.log(letters);
 let numbers = [1, 2, 3];
 console.log(numbers.join(' ')); // STRING '1 2 3'
-*/
+
+
 
 /////////////////////////////////////////////////
 // AT METHOD
+
 // This method work also with strings!
 const arr = [23, 11, 64];
 console.log(arr[0]); // 23
@@ -130,3 +132,35 @@ console.log(arr.at(-1)); // 64
 
 // Strings!
 console.log('Marco'.at(0)); // 'M'
+
+
+
+/////////////////////////////////////////////////
+// forEach() METHOD
+
+// forOf method for comparing
+// for (const movement of movements) {
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+// same result but with forEach() method
+console.log('----- forEach() -----');
+movements.forEach((movement, index, array) => {
+  if (movement > 0) {
+    console.log(
+      `Movement ${index + 1}: You deposited ${movement} from ${array}`
+    );
+  } else {
+    console.log(
+      `Movement ${index + 1}: You withdrew ${Math.abs(movement)} from ${array}`
+    );
+  }
+});
+
+
+*/
