@@ -74,3 +74,42 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+// SIMPLE ARRRAY METHODS
+
+// SLICE METHOD - NOT mutate original array
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+console.log(arr.slice(2)); // ['c', 'd', 'e']
+console.log(arr.slice(2, 4)); // ['c', 'd']
+console.log(arr.slice(-2)); // ['d', 'e']
+console.log(arr.slice(-1)); // ['e'] - new array with only last element from original array
+console.log(arr.slice(1, -2)); // ['b', 'c']
+console.log(arr.slice()); // ['a', 'b', 'c', 'd', 'e'] - shallow copy
+console.log([...arr]); // ['a', 'b', 'c', 'd', 'e'] - same result with SPREAD operator
+
+// SPLICE METHOD - YES mutate original array
+
+// console.log(arr.splice(2)); // ['c', 'd', 'e']
+arr.splice(-1); // last element
+console.log(arr.splice(1, 2)); //  ['b', 'c']
+console.log(arr); // ['a', 'd']
+
+// REVERST METHOD - YES, change original array
+arr = ['a', 'b', 'c', 'd', 'e'];
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse()); // ['f', 'g', 'h', 'i', 'j']
+console.log(arr2); // ['f', 'g', 'h', 'i', 'j'] - original array IS CHANGED
+// let string = 'PincoPallino';
+// console.log(string.reverse()); // NOT WORKING -> error
+
+// CONCAT METHOD
+const letters = arr.concat(arr2);
+console.log(letters); // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+console.log([...arr, ...arr2]); // same result = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+// JOIN METHOD
+console.log(letters.join(' - ')); // a - b - c - d - e - f - g - h - i - j STRING
+console.log(letters.join(', '));
+console.log(letters);
+let numbers = [1, 2, 3];
+console.log(numbers.join(' ')); // STRING '1 2 3'
