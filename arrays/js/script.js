@@ -80,6 +80,12 @@ function displayMovements(movements) {
 }
 displayMovements(account1.movements);
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, el) => acc + el, 0);
+  labelBalance.textContent = `${balance} €`;
+};
+calcDisplayBalance(account1.movements);
+
 const createUserName = accs => {
   accs.forEach(acc => {
     acc.username = acc.owner
@@ -240,7 +246,7 @@ console.log(movDescriptions);
 
 
 
-*/
+
 
 /////////////////////////////////////////////////
 // FILTER method
@@ -252,3 +258,16 @@ console.log(deposit);
 
 const withdrawals = movements.filter(el => el < 0);
 console.log(withdrawals);
+
+
+*/
+
+/////////////////////////////////////////////////
+// REDUCE method
+
+// const balance = movements.reduce(function (accumulator, el, i, arr) {
+//   console.log(`Iteration ${i}: ${accumulator}`);
+//   return accumulator + el;
+// }, 0);
+const balance = movements.reduce((accumulator, el) => accumulator + el, 0);
+console.log(balance); // 3840
