@@ -72,7 +72,7 @@ function displayMovements(movements) {
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-      <div class="movements__value">${el}</div>
+      <div class="movements__value">${el} €</div>
     </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -85,6 +85,25 @@ const calcDisplayBalance = function (movements) {
   labelBalance.textContent = `${balance} €`;
 };
 calcDisplayBalance(account1.movements);
+
+function calcDisplaySummary(movements) {
+  const income = movements
+    .filter(el => el > 0)
+    .reduce((acc, el) => acc + el, 0);
+  labelSumIn.textContent = `${income} €`;
+  const outcome = movements
+    .filter(el => el < 0)
+    .reduce((acc, el) => acc + el, 0);
+  labelSumOut.textContent = `${outcome} €`;
+  const interest = movements
+    .filter(el => el > 0)
+    .map(el => (el * 1.2) / 100)
+    .filter(el => el >= 1)
+    .reduce((acc, el) => acc + el, 0);
+  labelSumInterest.textContent = `${interest} €`;
+}
+
+calcDisplaySummary(account1.movements);
 
 const createUserName = accs => {
   accs.forEach(acc => {
@@ -260,7 +279,7 @@ const withdrawals = movements.filter(el => el < 0);
 console.log(withdrawals);
 
 
-*/
+
 
 /////////////////////////////////////////////////
 // REDUCE method
@@ -287,3 +306,17 @@ const min = movements.reduce((acc, el) => {
 }, movements[0]);
 
 console.log(min, 'minimum value of array');
+
+*/
+
+/////////////////////////////////////////////////
+// CHAINING method
+const eurToUsd = 1.1;
+const totalDepositUSD = movements
+  .filter(mov => mov > 0)
+  .map((mov, i, arr) => {
+    // console.log(arr);
+    return mov * eurToUsd;
+  })
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositUSD);
