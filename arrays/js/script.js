@@ -205,3 +205,24 @@ currenciesUnique.forEach((value, _, map) => {
 
 
 */
+
+/////////////////////////////////////////////////
+// MAP method
+const eurToUsd = 1.1;
+const movementsUSD = movements.map(mov => mov * eurToUsd);
+console.log(movements);
+console.log(movementsUSD);
+
+// for fun forOf method
+const movementsUSDfor = [];
+for (const iterator of movements) {
+  movementsUSDfor.push(iterator * eurToUsd);
+}
+console.log(movementsUSDfor); // same result as 'movementsUSD', but another phylosofy
+
+/////////
+const movDescriptions = movements.map(
+  (el, i, arr) =>
+    `Movement ${i + 1}: You ${el > 0 ? 'deposited' : 'withdrew'} ${el}`
+);
+console.log(movDescriptions);
