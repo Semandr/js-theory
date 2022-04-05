@@ -271,3 +271,19 @@ console.log(withdrawals);
 // }, 0);
 const balance = movements.reduce((accumulator, el) => accumulator + el, 0);
 console.log(balance); // 3840
+
+// Maximum value
+const max = movements.reduce((acc, el) => {
+  if (acc > el) return acc;
+  else return el;
+}, movements[0]);
+
+console.log(max, 'maximum value of array');
+
+// Minimum value
+const min = movements.reduce((acc, el) => {
+  if (acc < el) return acc;
+  else return el;
+}, movements[0]);
+
+console.log(min, 'minimum value of array');
