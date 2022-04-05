@@ -90,7 +90,6 @@ const createUserName = accs => {
   });
 };
 createUserName(accounts);
-console.log(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -242,3 +241,14 @@ console.log(movDescriptions);
 
 
 */
+
+/////////////////////////////////////////////////
+// FILTER method
+const deposit = movements.filter(function (el, i, arr) {
+  return el > 0;
+});
+console.log(movements);
+console.log(deposit);
+
+const withdrawals = movements.filter(el => el < 0);
+console.log(withdrawals);
