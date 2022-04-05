@@ -80,6 +80,18 @@ function displayMovements(movements) {
 }
 displayMovements(account1.movements);
 
+const createUserName = accs => {
+  accs.forEach(acc => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(el => el[0])
+      .join('');
+  });
+};
+createUserName(accounts);
+console.log(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -204,7 +216,7 @@ currenciesUnique.forEach((value, _, map) => {
 // Output like: USD: USD. And [object Set]
 
 
-*/
+
 
 /////////////////////////////////////////////////
 // MAP method
@@ -226,3 +238,7 @@ const movDescriptions = movements.map(
     `Movement ${i + 1}: You ${el > 0 ? 'deposited' : 'withdrew'} ${el}`
 );
 console.log(movDescriptions);
+
+
+
+*/
