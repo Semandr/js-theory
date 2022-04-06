@@ -414,7 +414,7 @@ const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account); // {owner: 'Jessica Davis', movements: Array(8), interestRate: 1.5, pin: 2222, username: 'jd'}
 
 
-*/
+
 
 /////////////////////////////////////////////////
 // SOME AND EVERY
@@ -436,3 +436,35 @@ const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
+
+
+*/
+
+/////////////////////////////////////////////////
+// FLAT AND FLAT MAP
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+const accoutMovements = accounts.map(acc => acc.movements);
+console.log(accoutMovements);
+const allMovements = accoutMovements.flat();
+console.log(allMovements);
+
+const overalBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+
+// Flat
+const overalBalance2 = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, el) => acc + el, 0);
+console.log(overalBalance2);
+
+// FlatMap
+const overalBalance3 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, el) => acc + el, 0);
+console.log(overalBalance3);
