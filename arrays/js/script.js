@@ -307,7 +307,7 @@ const min = movements.reduce((acc, el) => {
 
 console.log(min, 'minimum value of array');
 
-*/
+
 
 /////////////////////////////////////////////////
 // CHAINING method
@@ -320,3 +320,14 @@ const totalDepositUSD = movements
   })
   .reduce((acc, mov) => acc + mov, 0);
 console.log(totalDepositUSD);
+
+
+*/
+
+/////////////////////////////////////////////////
+// FIND method
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(firstWithdrawal);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account); // {owner: 'Jessica Davis', movements: Array(8), interestRate: 1.5, pin: 2222, username: 'jd'}
