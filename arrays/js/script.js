@@ -78,32 +78,28 @@ function displayMovements(movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 }
-displayMovements(account1.movements);
 
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, el) => acc + el, 0);
   labelBalance.textContent = `${balance} €`;
 };
-calcDisplayBalance(account1.movements);
 
-function calcDisplaySummary(movements) {
-  const income = movements
+function calcDisplaySummary(acc) {
+  const income = acc.movements
     .filter(el => el > 0)
     .reduce((acc, el) => acc + el, 0);
   labelSumIn.textContent = `${income} €`;
-  const outcome = movements
+  const outcome = acc.movements
     .filter(el => el < 0)
     .reduce((acc, el) => acc + el, 0);
   labelSumOut.textContent = `${outcome} €`;
-  const interest = movements
+  const interest = acc.movements
     .filter(el => el > 0)
-    .map(el => (el * 1.2) / 100)
+    .map(el => (el * acc.interestRate) / 100)
     .filter(el => el >= 1)
     .reduce((acc, el) => acc + el, 0);
   labelSumInterest.textContent = `${interest} €`;
 }
-
-calcDisplaySummary(account1.movements);
 
 const createUserName = accs => {
   accs.forEach(acc => {
@@ -115,6 +111,34 @@ const createUserName = accs => {
   });
 };
 createUserName(accounts);
+
+// Event handler
+let currentAccount;
+
+btnLogin.addEventListener('click', e => {
+  // Prevent form from submitting
+  e.preventDefault();
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // display UI and 'welcome' message
+    labelWelcome.textContent = `Welcome back ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 1;
+    // clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur(); // element loose the focus
+    // display movements
+    displayMovements(currentAccount.movements);
+    // display balance
+    calcDisplayBalance(currentAccount.movements);
+    // display summary
+    calcDisplaySummary(currentAccount);
+  }
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -322,7 +346,7 @@ const totalDepositUSD = movements
 console.log(totalDepositUSD);
 
 
-*/
+
 
 /////////////////////////////////////////////////
 // FIND method
@@ -331,3 +355,6 @@ console.log(firstWithdrawal);
 
 const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account); // {owner: 'Jessica Davis', movements: Array(8), interestRate: 1.5, pin: 2222, username: 'jd'}
+
+
+*/
