@@ -94,7 +94,7 @@ const displayMovements = function (movements, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${mov}€</div>
+        <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
 
@@ -104,19 +104,19 @@ const displayMovements = function (movements, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance}€`;
+  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes}€`;
+  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out)}€`;
+  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -126,7 +126,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 const createUsernames = function (accs) {
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = +inputLoanAmount.value;
+  const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -252,6 +252,7 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 // LECTURES
 
+/*
 ////////////////////////////////////////////////
 // CONVERTING AND CHECKING NUMBERS
 
@@ -281,3 +282,44 @@ console.log(Number.isFinite(20)); // true
 console.log(Number.isFinite('20')); // false
 console.log(Number.isInteger(20)); // true
 console.log(Number.isInteger('20')); // false
+
+
+
+*/
+////////////////////////////////////////////////
+// MATH AND ROUNDING
+
+console.log(Math.sqrt(25)); // 5 - square root
+console.log(Math.sqrt(121)); // 11
+
+// Get maximum value
+console.log(Math.max(5, 4, 77, 15)); // 77
+console.log(Math.max(5, 4, '88', 15)); // 88 - does type coercion
+console.log(Math.max(5, 4, '88px', 15)); // NaN - with letters don't work
+
+// Get minimum value
+console.log(Math.min(2, 17, 66, 11, 3, 47)); // 2
+console.log(Math.min('2', 17, 66, 11, 3, 47)); // 2
+
+// Nice random function beetwen min amd max values
+const randomInt = (min, max) =>
+  Math.trunc(Math.random() * (max - min + 1)) + min;
+// 0....1 -> 0...(max - min) -> min...max
+
+console.log(randomInt(15, 20)); // 15-20
+
+// Rounding integers
+console.log(Math.round(22.3)); // 22
+console.log(Math.round(22.9)); // 23
+
+console.log(Math.ceil(22.9)); // 23
+console.log(Math.ceil(22.1)); // 23
+
+console.log(Math.floor(55.9)); // 55
+console.log(Math.floor('55.4')); // 55 -> number
+
+// Rounding decimals
+console.log((2.7).toFixed(0)); // 3 -> string
+console.log((2.7).toFixed(3)); // 2.700 -> string
+console.log((2.345).toFixed(2)); // 2.35 -> string
+console.log(+(2.345).toFixed(2)); // 2.35 -> number
