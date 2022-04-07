@@ -480,7 +480,7 @@ const overalBalance3 = accounts
 console.log(overalBalance3);
 
 
-*/
+
 
 /////////////////////////////////////////////////
 // SORTING ARRAYS
@@ -510,3 +510,49 @@ console.log(movements); // [-650, -400, -130, 70, 200, 450, 1300, 3000]
 
 movements.sort((a, b) => b - a);
 console.log(movements); // [3000, 1300, 450, 200, 70, -130, -400, -650]
+
+
+*/
+
+/////////////////////////////////////////////////
+// CREATING ARRAYS
+const arr = [1, 2, 3, 4, 5, 6, 7];
+
+const x = new Array(7);
+console.log(x); // [empty × 7]
+
+// x.fill(1);
+// console.log(x); // [1, 1, 1, 1, 1, 1, 1]
+
+x.fill(1, 3, 5);
+console.log(x); // [empty × 3, 1, 1, empty × 2]
+
+arr.fill(77, 2, 6);
+console.log(arr); // [1, 2, 77, 77, 77, 77, 7]
+
+// Array.from
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y); // [1, 1, 1, 1, 1, 1, 1]
+
+const b = Array.from({ length: 7 }, (el, i) => i + 1);
+console.log(b); // [1, 2, 3, 4, 5, 6, 7]
+
+// let rollDice = Math.trunc(Math.random() * 6) + 1;
+// console.log(rollDice);
+// random 100 roll dice
+const arrDice100 = Array.from(
+  { length: 100 },
+  (_, i) => (i = Math.trunc(Math.random() * 6) + 1)
+);
+console.log(arrDice100);
+
+// Use wit NodeList
+
+labelBalance.addEventListener('click', e => {
+  e.preventDefault();
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI); // [1300, 70, -130, -650, 3000, -400, 450, 200]
+});
