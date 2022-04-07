@@ -512,7 +512,7 @@ movements.sort((a, b) => b - a);
 console.log(movements); // [3000, 1300, 450, 200, 70, -130, -400, -650]
 
 
-*/
+
 
 /////////////////////////////////////////////////
 // CREATING ARRAYS
@@ -556,3 +556,75 @@ labelBalance.addEventListener('click', e => {
   );
   console.log(movementsUI); // [1300, 70, -130, -650, 3000, -400, 450, 200]
 });
+
+
+
+
+/////////////////////////////////////////////////
+// ARRAY EXERCISES
+
+// 1. Total fo bank money
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((acc, el) => acc + el, 0);
+
+console.log(bankDepositSum); // 25180
+
+// 2. Quantity of deposits equal or bigger then 1000
+const numDeposit1000 = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov >= 1000).length;
+
+console.log(numDeposit1000); // 6
+
+// Same thing using reduce
+const numDeposit1000_2 = accounts
+  .flatMap(acc => acc.movements)
+  // .reduce((acc, el) => (el >= 1000 ? acc + 1 : acc), 0);
+  .reduce((acc, el) => (el >= 1000 ? ++acc : acc), 0);
+
+console.log(numDeposit1000_2); // 6
+
+// Prefixed ++
+let a = 10;
+console.log(a++); // 10 !
+
+let b = 10;
+console.log(++b); // 11 !
+
+// 3.
+// More advanced case of .reduce Method
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (accumulator, curValue) => {
+      curValue > 0
+        ? (accumulator.deposits += curValue)
+        : (accumulator.withdrawals += curValue);
+      return accumulator;
+    },
+    { deposits: 0, withdrawals: 0 } // this is accumulator now
+  );
+
+console.log(`Deposits: ${deposits}. Withdrawals: ${withdrawals}`);
+// Oputut, string: ====== Deposits: 25180. Withdrawals: -7340
+
+// 4.
+// Convert any string to CapitalCase with some exeptions
+function convertTitleCase(title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'in', 'with'];
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+  return capitalize(titleCase);
+}
+
+console.log(convertTitleCase(`This is a nice title`));
+console.log(convertTitleCase(`This is a LONG title, but not too long`));
+console.log(convertTitleCase(`and here is a another title with an EXAMPLE`));
+
+*/
