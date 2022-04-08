@@ -172,23 +172,44 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const startLogOutTimer = function () {
+  //  Set the time to 5 minutes
+  let time = 300;
+  //  Call the timer every second
+  const timer = setInterval(() => {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    //  In eche call, print remaning time to userUI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    //  When 0 second, stop timer and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.opacity = 0;
+    }
+    // Decrese 1 sec
+    time--;
+  }, 1000);
+};
+
 ///////////////////////////////////////
 // Event handlers
 let currentAccount;
 
 // FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 1;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 1;
 
-const now = new Date();
-const day = `${now.getDate()}`.padStart(2, 0);
-const month = `${now.getMonth() + 1}`.padStart(2, 0);
-const year = now.getFullYear();
-const hours = now.getHours();
-const minutes = now.getMinutes();
-// day/month/year
-labelDate.textContent = `${day}/${month}/${year}, ${hours}:${minutes}`;
+// const now = new Date();
+// const day = `${now.getDate()}`.padStart(2, 0);
+// const month = `${now.getMonth() + 1}`.padStart(2, 0);
+// const year = now.getFullYear();
+// const hours = now.getHours();
+// const minutes = now.getMinutes();
+// // day/month/year
+// labelDate.textContent = `${day}/${month}/${year}, ${hours}:${minutes}`;
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
@@ -220,6 +241,7 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    startLogOutTimer();
     // Update UI
     updateUI(currentAccount);
   }
@@ -463,7 +485,7 @@ const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 24));
 console.log(days1); // 10
 
 
-*/
+
 ////////////////////////////////////////////////
 // TIMERS
 // Set Time out
@@ -480,3 +502,5 @@ setInterval(() => {
   const now = new Date();
   console.log(now);
 }, 3000);
+
+*/
