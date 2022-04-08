@@ -354,7 +354,7 @@ labelBalance.addEventListener('click', function () {
 
 
 
-*/
+
 ////////////////////////////////////////////////
 // NUMERIC SEPARATORS
 const diametr = 287_460_000_000;
@@ -365,3 +365,36 @@ console.log(price); // 34599
 
 console.log(Number('230000')); // 230000
 console.log(Number('230_000')); // NaN
+
+
+
+
+////////////////////////////////////////////////
+// DATE AND TIMES
+
+// Create Date
+const now = new Date();
+console.log(now); // Fri Apr 08 2022 10:23:00 GMT+0200
+
+// parse date from string
+console.log(new Date('Fri Apr 08 2022 10:24:39 GMT+0200'));
+console.log(new Date(account1.movementsDates[0])); // Mon Nov 18 2019 22:31:17 GMT+0100
+console.log(new Date(2037, 10, 20, 15, 23, 5)); // Fri Nov 20 2037 15:23:05 GMT+0100
+// November because in JS month is 0-based
+
+console.log(new Date(0)); // Thu Jan 01 1970 01:00:00
+console.log(new Date(3 * 24 * 60 * 60 * 1000)); // Sun Jan 04 1970 01:00:00
+
+
+// Working with dates
+const future = new Date(2037, 10, 20, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate()); // day of the month
+console.log(future.getDay()); // 5 day of the week
+console.log(future.toISOString()); // 2037-11-20T14:23:00.000Z
+console.log(future.toDateString()); // Fri Nov 20 2037
+
+
+*/
