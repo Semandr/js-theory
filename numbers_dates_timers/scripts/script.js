@@ -326,7 +326,7 @@ console.log(+(2.345).toFixed(2)); // 2.35 -> number
 
 
 
-*/
+
 ////////////////////////////////////////////////
 // REMAINDER OPERATOR
 console.log(5 % 2); // 1 ========= 5 = 2 * 2 + 1
@@ -351,3 +351,17 @@ labelBalance.addEventListener('click', function () {
     if (i % 3 === 0) row.style.backgroundColor = 'blue';
   });
 });
+
+
+
+*/
+////////////////////////////////////////////////
+// NUMERIC SEPARATORS
+const diametr = 287_460_000_000;
+console.log(diametr); // 287460000000
+
+const price = 345_99;
+console.log(price); // 34599
+
+console.log(Number('230000')); // 230000
+console.log(Number('230_000')); // NaN
