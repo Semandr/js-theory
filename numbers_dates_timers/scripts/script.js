@@ -258,14 +258,14 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
-
-    // Add date
-    currentAccount.movementsDates.push(new Date().toISOString());
-
-    // Update UI
-    updateUI(currentAccount);
+    setTimeout(function () {
+      // Add movement
+      currentAccount.movements.push(amount);
+      // Add date
+      currentAccount.movementsDates.push(new Date().toISOString());
+      // Update UI
+      updateUI(currentAccount);
+    }, 5000);
   }
   inputLoanAmount.value = '';
 });
@@ -449,7 +449,7 @@ console.log(future.toISOString()); // 2037-11-20T14:23:00.000Z
 console.log(future.toDateString()); // Fri Nov 20 2037
 
 
-*/
+
 ////////////////////////////////////////////////
 // OPERATINGS WITH DATES
 const future = new Date(2037, 10, 20, 15, 23);
@@ -461,3 +461,22 @@ const calcDaysPassed = (date1, date2) =>
 
 const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 24));
 console.log(days1); // 10
+
+
+*/
+////////////////////////////////////////////////
+// TIMERS
+// Set Time out
+const ingredients = ['olives', 'spinach'];
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza 🍕 with ${ing1} and ${ing2}`),
+  3000,
+  ...ingredients
+);
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+
+// setInterval
+setInterval(() => {
+  const now = new Date();
+  console.log(now);
+}, 3000);
