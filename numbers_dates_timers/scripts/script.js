@@ -285,7 +285,7 @@ console.log(Number.isInteger('20')); // false
 
 
 
-*/
+
 ////////////////////////////////////////////////
 // MATH AND ROUNDING
 
@@ -323,3 +323,31 @@ console.log((2.7).toFixed(0)); // 3 -> string
 console.log((2.7).toFixed(3)); // 2.700 -> string
 console.log((2.345).toFixed(2)); // 2.35 -> string
 console.log(+(2.345).toFixed(2)); // 2.35 -> number
+
+
+
+*/
+////////////////////////////////////////////////
+// REMAINDER OPERATOR
+console.log(5 % 2); // 1 ========= 5 = 2 * 2 + 1
+console.log(8 % 3); // 2
+
+// use for odd or even numbers
+// even
+console.log(6 % 2); // 0
+// odd
+console.log(7 % 2); // 1
+
+// function for controll, return true or false
+const isEven = n => n % 2 === 0;
+console.log(isEven(8)); // true
+console.log(isEven(9)); // false
+console.log(isEven(22)); // true
+
+// for fun
+labelBalance.addEventListener('click', function () {
+  [...document.querySelectorAll('.movements__row')].forEach((row, i) => {
+    if (i % 2 === 0) row.style.backgroundColor = 'orange';
+    if (i % 3 === 0) row.style.backgroundColor = 'blue';
+  });
+});
