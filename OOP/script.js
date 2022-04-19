@@ -5,18 +5,34 @@
 ///////////////////////
 
 class PersonCl {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
   calcAge() {
     console.log(2022 - this.birthYear);
   }
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+  get age() {
+    return 2022 - this.birthYear;
+  }
+  // Set the property that already exists
+  set fullName(name) {
+    console.log(name);
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+  get fullName() {
+    return this._fullName;
+  }
 }
-const jessica = new PersonCl('Jessica', 1996);
+const jessica = new PersonCl('Jessica Davis', 1996);
 
 console.log(jessica);
 jessica.calcAge(); // 26
+console.log(jessica.age); // 26
 
 console.log(jessica.__proto__ === PersonCl.prototype); // true
 // Manually adding prototipe
@@ -24,6 +40,26 @@ PersonCl.prototype.greet = function () {
   console.log(`Hey ${this.firstName}`);
 };
 jessica.greet(); // Hey Jessica
+
+///////////////////////////////////////////////////
+// SETTERS AND GETTERS
+///////////////////////
+
+const walter = new PersonCl('Walter White', 1965);
+
+const account = {
+  owner: 'Jonas',
+  movements: [200, 530, 120, 300],
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+  set latest(movement) {
+    this.movements.push(movement);
+  },
+};
+console.log(account.latest); // 300
+account.latest = 50;
+console.log(account.movements); // [200, 530, 120, 300, 50]
 ///////////////////////////////////////////////////
 // FUNCTION CONSTRUCTOR
 ///////////////////////
