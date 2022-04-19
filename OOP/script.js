@@ -1,6 +1,30 @@
 'use strict';
 
 ///////////////////////////////////////////////////
+// ES6 CLASSES
+///////////////////////
+
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  calcAge() {
+    console.log(2022 - this.birthYear);
+  }
+}
+const jessica = new PersonCl('Jessica', 1996);
+
+console.log(jessica);
+jessica.calcAge(); // 26
+
+console.log(jessica.__proto__ === PersonCl.prototype); // true
+// Manually adding prototipe
+PersonCl.prototype.greet = function () {
+  console.log(`Hey ${this.firstName}`);
+};
+jessica.greet(); // Hey Jessica
+///////////////////////////////////////////////////
 // FUNCTION CONSTRUCTOR
 ///////////////////////
 //
@@ -61,6 +85,7 @@ console.log(arr.__proto__); // [constructor: ƒ, concat: ƒ, copyWithin: ƒ, fil
 // contains ALL methods for Arrays
 console.log(arr.__proto__ === Array.prototype); // true
 
+
 ///////////////////////////////////////////////////
 // CODING CHALLENGE #1
 ///////////////////////
@@ -75,7 +100,7 @@ Your tasks:
 Test data:
 § Data car 1: 'BMW' going at 120 km/h
 § Data car 2: 'Mercedes' going at 95 km/h
-*/
+
 // 1.
 const Car = function (make, speed) {
   this.make = make;
@@ -99,3 +124,4 @@ bmw.brake();
 
 mercedes.accelerate();
 mercedes.brake();
+*/
