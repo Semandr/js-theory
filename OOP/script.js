@@ -65,6 +65,7 @@ const account = {
 console.log(account.latest); // 300
 account.latest = 50;
 console.log(account.movements); // [200, 530, 120, 300, 50]
+
 ///////////////////////////////////////////////////
 // FUNCTION CONSTRUCTOR
 ///////////////////////
