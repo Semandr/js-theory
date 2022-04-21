@@ -9,6 +9,7 @@ class PersonCl {
     this.fullName = fullName;
     this.birthYear = birthYear;
   }
+  // Methods will be added to .prototype property
   calcAge() {
     console.log(2022 - this.birthYear);
   }
@@ -26,6 +27,10 @@ class PersonCl {
   }
   get fullName() {
     return this._fullName;
+  }
+  // Static method
+  static hey() {
+    console.log(`Hi there!`);
   }
 }
 const jessica = new PersonCl('Jessica Davis', 1996);
@@ -64,22 +69,30 @@ console.log(account.movements); // [200, 530, 120, 300, 50]
 // FUNCTION CONSTRUCTOR
 ///////////////////////
 //
-/*
+
 const Person = function (firstName, birthYear) {
   this.firstName = firstName;
   this.birthYear = birthYear;
 };
 
 const marco = new Person('Marco', 1991);
-console.log(marco);
+// console.log(marco);
 
 const matilda = new Person('Matilda', 2017);
 const jack = new Person('Jack', 1975);
 
-console.log(matilda, jack);
+// ADD A STATIC METHOD
+///////////////////////
+Person.hey = function () {
+  console.log(`Hei there 👋🏻`);
+};
+// call the static method:
+Person.hey(); // Hei there 👋🏻
 
-console.log(marco instanceof Person); // true
+// console.log(matilda, jack);
 
+// console.log(marco instanceof Person); // true
+/*
 ///////////////////////////////////////////////////
 // PROTOTYPES
 ///////////////////////
