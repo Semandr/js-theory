@@ -25,7 +25,7 @@ Student.prototype.constructor = Student;
 const mike = new Student('Mike', 2020, 'Computer Sciensce');
 mike.introduce(); // My name is Mike and I study Computer Sciensce
 mike.calcAge(); // 17
-*/
+
 
 /////////////////////////////////////////////////
 // INHERITANCE BETWEEN ES6 CLASSES
@@ -83,3 +83,41 @@ class StudentCl extends PersonCl {
 const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
 martha.introduce();
 martha.calcAge();
+
+
+*/
+
+/////////////////////////////////////////////////
+// INHERITANCE BETWEEN CLASSES OBJECT.CREATE()
+////////////////////////////////////////////////
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+// Simple prototype connection
+const steven = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto);
+
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+// proto of proto connection
+const jay = Object.create(StudentProto);
+// returnt EMPTY object,
+
+// charge the object
+jay.init('Jay', 2010, 'Biology');
+jay.introduce(); // My name is Jay and I study Biology
+jay.calcAge(); // 27
