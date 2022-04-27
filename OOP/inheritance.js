@@ -131,40 +131,49 @@ jay.calcAge(); // 27
 ////////////////////////////////////////////////
 
 class Account {
+  // Public fields (instances)
+  locale = navigator.language;
+
+  // Private fields
+  #movements = [];
+  #pin;
+
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    this._pin = pin;
+    this.#pin = pin;
     // protected property
-    this._movements = [];
-    this.locale = navigator.language;
+    // this._movements = [];
+    // this.locale = navigator.language;
 
     console.log(`Thanks for opening an account ${owner}`);
   }
-
+  // Public methods
   // Public interface of our object
   getMovements() {
-    return this._movements;
+    return this.#movements;
   }
   deposit(value) {
-    this._movements.push(value);
+    this.#movements.push(value);
   }
   withdraw(value) {
     this.deposit(-value);
   }
-  _approveLoan(value) {
-    return true;
-  }
+
   requestLoan(value) {
     if (this._approveLoan(value)) {
       this.deposit(value);
       console.log(`Loan approved`);
     }
   }
+  // Private methods
+  // #approveLoan(value) {
+  _approveLoan(value) {
+    return true;
+  }
 }
 
 const acc1 = new Account('Jonas', 'EUR', 1111);
-console.log(acc1);
 
 // acc1.movements.push(250);
 // acc1.movements.push(-140);
@@ -175,3 +184,4 @@ acc1.requestLoan(1000);
 console.log(acc1.getMovements());
 
 console.log(acc1);
+// console.log(acc1.#movements);
