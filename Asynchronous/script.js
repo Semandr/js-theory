@@ -3,6 +3,31 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
+function renderCountry(data, className = '') {
+  const name = data.name.common;
+  const flag = data.flags.svg;
+  const region = data.region;
+  const languages = Object.values(data.languages)[0];
+  const currencies = Object.values(data.currencies)[0].name;
+
+  const html = `
+  <article class="country ${className}">
+  <img class="country__img" src="${flag}" />
+  <div class="country__data">
+    <h3 class="country__name">${name}</h3>
+    <h4 class="country__region">${region}</h4>
+    <p class="country__row"><span>👫</span>${(
+      +data.population / 1000000
+    ).toFixed(1)}M people</p>
+    <p class="country__row"><span>🗣️</span>${languages}</p>
+    <p class="country__row"><span>💰</span>${currencies}</p>
+  </div>
+</article>
+  `;
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.style.opacity = 1;
+}
+
 ///////////////////////////////////////
 // AJAX-CALL
 /////////////////////////////////////
@@ -43,34 +68,10 @@ getCountryData('usa');
 getCountryData('poland');
 
 
-*/
+
 ///////////////////////////////////////
 // CALLBACK HELL
 /////////////////////////////////////
-function renderCountry(data, className = '') {
-  const name = data.name.common;
-  const flag = data.flags.svg;
-  const region = data.region;
-  const languages = Object.values(data.languages)[0];
-  const currencies = Object.values(data.currencies)[0].name;
-
-  const html = `
-  <article class="country ${className}">
-  <img class="country__img" src="${flag}" />
-  <div class="country__data">
-    <h3 class="country__name">${name}</h3>
-    <h4 class="country__region">${region}</h4>
-    <p class="country__row"><span>👫</span>${(
-      +data.population / 1000000
-    ).toFixed(1)}M people</p>
-    <p class="country__row"><span>🗣️</span>${languages}</p>
-    <p class="country__row"><span>💰</span>${currencies}</p>
-  </div>
-</article>
-  `;
-  countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
-}
 
 function getCountryAndNeighbour(country) {
   // AJAX call coutry 1
@@ -100,3 +101,17 @@ function getCountryAndNeighbour(country) {
 }
 getCountryAndNeighbour('italy');
 // getCountryAndNeighbour('austria');
+
+
+*/
+///////////////////////////////////////
+// PROMISES AND FETCH API
+/////////////////////////////////////
+const request = fetch(`https://restcountries.com/v3.1/name/italy`);
+console.log(request);
+
+const getCoutryData = country =>
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(response => response.json())
+    .then(data => renderCountry(data[0]));
+getCoutryData('italy');
