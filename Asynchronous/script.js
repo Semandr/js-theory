@@ -111,7 +111,18 @@ const request = fetch(`https://restcountries.com/v3.1/name/italy`);
 console.log(request);
 
 const getCoutryData = country =>
+  // country 1
   fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then(response => response.json())
-    .then(data => renderCountry(data[0]));
+    .then(data => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders[0];
+      // Coutry 2
+      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+    })
+    .then(response => response.json())
+    .then(data => {
+      [data] = data;
+      renderCountry(data, 'neighbour');
+    });
 getCoutryData('italy');
