@@ -115,17 +115,29 @@ getCountryAndNeighbour('italy');
 const request = fetch(`https://restcountries.com/v3.1/name/italy`);
 console.log(request);
 
+function getJSON(url, errorMsg = 'Something went wrong') {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`${errorMsg} ${response.status}`);
+    return response.json();
+  });
+}
+
+//
+
 const getCoutryData = country =>
-  // country 1
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(response => response.json())
+  // Dountry 1
+  getJSON(`https://restcountries.com/v3.1/name/${country}`, 'Country not found')
     .then(data => {
       renderCountry(data[0]);
       const neighbour = data[0].borders[0];
-      // Coutry 2
-      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+      if (!neighbour) throw new Error('No neighbour found');
+      // const neighbour = 'asdfas';
+      // Country 2
+      return getJSON(
+        `https://restcountries.com/v3.1/alpha/${neighbour}`,
+        'Country not found'
+      );
     })
-    .then(response => response.json())
     .then(data => {
       [data] = data;
       renderCountry(data, 'neighbour');
@@ -139,4 +151,4 @@ const getCoutryData = country =>
     .finally(() => (countriesContainer.style.opacity = 1));
 
 btn.addEventListener('click', () => getCoutryData('italy'));
-getCoutryData('adfasdf');
+getCoutryData('australia');
