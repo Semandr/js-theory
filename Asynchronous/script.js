@@ -25,7 +25,12 @@ function renderCountry(data, className = '') {
 </article>
   `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
+  // countriesContainer.style.opacity = 1;
+}
+
+function renderError(mgs) {
+  countriesContainer.insertAdjacentText('beforeend', mgs);
+  // countriesContainer.style.opacity = 1;
 }
 
 ///////////////////////////////////////
@@ -105,7 +110,7 @@ getCountryAndNeighbour('italy');
 
 */
 ///////////////////////////////////////
-// PROMISES AND FETCH API
+// PROMISES AND FETCH API, HANDLING ERRORS
 /////////////////////////////////////
 const request = fetch(`https://restcountries.com/v3.1/name/italy`);
 console.log(request);
@@ -124,5 +129,14 @@ const getCoutryData = country =>
     .then(data => {
       [data] = data;
       renderCountry(data, 'neighbour');
-    });
-getCoutryData('italy');
+    })
+    .catch(err => {
+      console.error(`💥 ${err}`);
+      renderError(
+        `Something went wrong 🤷🏻 🤷🏻 🤷🏻  Error:'${err.message}'. Try again 💁🏻`
+      );
+    })
+    .finally(() => (countriesContainer.style.opacity = 1));
+
+btn.addEventListener('click', () => getCoutryData('italy'));
+getCoutryData('adfasdf');
