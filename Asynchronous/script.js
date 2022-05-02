@@ -152,3 +152,13 @@ const getCoutryData = country =>
 
 btn.addEventListener('click', () => getCoutryData('italy'));
 getCoutryData('australia');
+
+//////////////////////////////////
+// Example of event Loop
+//
+console.log(`Test start`); // 1
+setTimeout(() => {
+  console.log(`0 sec timer`);
+}, 0); // 4
+Promise.resolve('Resolved promise 1').then(res => console.log(res)); // 3
+console.log('Test end'); // 2
