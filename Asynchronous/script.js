@@ -156,9 +156,47 @@ getCoutryData('australia');
 //////////////////////////////////
 // Example of event Loop
 //
+/*
 console.log(`Test start`); // 1
 setTimeout(() => {
   console.log(`0 sec timer`);
 }, 0); // 4
 Promise.resolve('Resolved promise 1').then(res => console.log(res)); // 3
 console.log('Test end'); // 2
+
+
+*/
+
+//////////////////////////////////
+// Building a simple promise
+//
+const lotteryPromise = new Promise(function (resolve, reject) {
+  console.log(`Lottery 🎟`);
+  setTimeout(() => {
+    if (Math.random() >= 0.5) {
+      resolve(`You WIN 💶`);
+    } else {
+      reject(new Error(`You are looser 🤦🏻`));
+    }
+  }, 3000);
+});
+
+lotteryPromise
+  .then(result => console.log(result))
+  .catch(error => console.log(error));
+
+// More real example
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+wait(2)
+  .then(() => {
+    console.log(`I waited for 2 seconds`);
+    return wait(1);
+  })
+  .then(() => console.log(`I waited for 1 seconds`));
+
+//
+Promise.resolve('Immediately resolved promise').then(x => console.log(x));
