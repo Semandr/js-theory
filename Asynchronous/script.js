@@ -113,7 +113,6 @@ getCountryAndNeighbour('italy');
 // PROMISES AND FETCH API, HANDLING ERRORS
 /////////////////////////////////////
 const request = fetch(`https://restcountries.com/v3.1/name/italy`);
-console.log(request);
 
 function getJSON(url, errorMsg = 'Something went wrong') {
   return fetch(url).then(response => {
@@ -125,7 +124,7 @@ function getJSON(url, errorMsg = 'Something went wrong') {
 //
 
 const getCoutryData = country =>
-  // Dountry 1
+  // Country 1
   getJSON(`https://restcountries.com/v3.1/name/${country}`, 'Country not found')
     .then(data => {
       renderCountry(data[0]);
@@ -143,15 +142,14 @@ const getCoutryData = country =>
       renderCountry(data, 'neighbour');
     })
     .catch(err => {
-      console.error(`💥 ${err}`);
+      // console.error(`💥 ${err}`);
       renderError(
         `Something went wrong 🤷🏻 🤷🏻 🤷🏻  Error:'${err.message}'. Try again 💁🏻`
       );
     })
     .finally(() => (countriesContainer.style.opacity = 1));
 
-btn.addEventListener('click', () => getCoutryData('italy'));
-getCoutryData('australia');
+// btn.addEventListener('click', () => getCoutryData('italy'));
 
 //////////////////////////////////
 // Example of event Loop
@@ -165,7 +163,7 @@ Promise.resolve('Resolved promise 1').then(res => console.log(res)); // 3
 console.log('Test end'); // 2
 
 
-*/
+
 
 //////////////////////////////////
 // Building a simple promise
@@ -200,3 +198,46 @@ wait(2)
 
 //
 Promise.resolve('Immediately resolved promise').then(x => console.log(x));
+
+
+
+*/
+
+function getPosition() {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   error => reject(error)
+    // );
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+}
+getPosition().then(position => console.log(position));
+
+function whereAmI() {
+  // new code
+  getPosition()
+    .then(position => {
+      const { latitude, longitude } = position.coords;
+      console.log(latitude);
+      console.log(longitude);
+      return fetch(`https://geocode.xyz/${latitude},${longitude}?geoit=json`);
+    })
+    .then(result => {
+      if (!result.ok)
+        throw new Error(`Problem with geocoding ${result.status}`);
+      return result.json();
+    })
+    .then(data => {
+      console.log(data);
+      console.log(`You are in ${data.city}, ${data.country}`);
+      return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+    })
+    .then(result => {
+      if (!result.ok) throw new Error(`Country not found (${result.status})`);
+      return result.json();
+    })
+    .catch(error => console.error(`${error.message} 💥`));
+}
+
+btn.addEventListener('click', whereAmI);
