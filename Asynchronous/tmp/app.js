@@ -25,6 +25,7 @@ function renderCountry(data, className = '') {
 </article>
   `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
+  countriesContainer.style.opacity = 1;
 }
 const request = fetch('https://restcountries.com/v3.1/name/portugal');
 
@@ -38,20 +39,29 @@ function renderError(msg) {
 // Handling Rejected Promises
 // Throwing Errors Manually
 
+// This is helper function for error handling
+function getJSON(url, errorMsg = 'Something went wrong') {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`${errorMsg}: ${response.status}`);
+    return response.json();
+  });
+}
+
 function getCountryData(country) {
   // Country 1
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(response =>
-      response.json().then(data => {
-        renderCountry(data[0]);
-        const neighbour = data[0].borders?.[0];
-        if (!neighbour) return;
-        // Country 2
-        return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
-      })
-    )
-    .then(response => response.json())
+  getJSON(`https://restcountries.com/v3.1/name/${country}`, `Country not found`)
     .then(data => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders?.[0];
+      if (!neighbour) return;
+      // Country 2
+      return getJSON(
+        `https://restcountries.com/v3.1/alpha/${neighbour}`,
+        `Country not found`
+      );
+    })
+    .then(data => {
+      if (!data) return;
       [data] = data;
       renderCountry(data, 'neighbour');
     })
@@ -61,4 +71,23 @@ function getCountryData(country) {
     })
     .finally(() => (countriesContainer.style.opacity = 1));
 }
-btn.addEventListener('click', () => getCountryData('italy'));
+btn.addEventListener('click', () => getCountryData('usa'));
+
+/////////////////////////////
+// Coding challenge
+function whereAmI(lat, lng) {
+  fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+    .then(response => {
+      if (!response.ok) throw new Error(`Somenthing went wrong`);
+      return response.json();
+    })
+    .then(data => {
+      if (!data) return;
+      console.log(data);
+      console.log(`You are in ${data.city}, ${data.country}`);
+    })
+    .then(data => renderCountry(data[0]))
+    .catch(renderError(`Something went wrong`))
+    .finally(() => (countriesContainer.style.opacity = 1));
+}
+whereAmI(52.508, 13.381);
