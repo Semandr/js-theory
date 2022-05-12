@@ -261,22 +261,30 @@ function getPostition() {
 }
 
 const whereAmI = async function () {
-  // Geolocation
-  const position = await getPostition();
-  const { latitude: lat, longitude: lng } = position.coords;
+  try {
+    // Geolocation
+    const position = await getPostition();
+    const { latitude: lat, longitude: lng } = position.coords;
 
-  // Reverse geocoding
-  const responseGeo = await fetch(
-    `https://geocode.xyz/${lat},${lng}?geoit=json`
-  );
-  const dataGeo = await responseGeo.json();
+    // Reverse geocoding
+    const responseGeo = await fetch(
+      `https://geocode.xyz/${lat},${lng}?geoit=json`
+    );
+    if (!responseGeo.ok) throw new Error('Problem getting location data');
+    const dataGeo = await responseGeo.json();
 
-  // Country data
-  const response = await fetch(
-    `https://restcountries.com/v3.1/name/${dataGeo.country}`
-  );
-  const data = await response.json();
-  renderCountry(data[0]);
+    // Country data
+    const response = await fetch(
+      `https://restcountries.com/v3.1/name/${dataGeo.country}`
+    );
+    if (!response.ok) throw new Error(`Problem to found country`);
+    const data = await response.json();
+    renderCountry(data[0]);
+  } catch (error) {
+    renderError(`Something went wrong ${error.message}`);
+  }
 };
 
-btn.addEventListener('click', whereAmI);
+whereAmI();
+
+// btn.addEventListener('click', whereAmI);
