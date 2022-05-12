@@ -3,35 +3,43 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
-function renderCountry(data, className = '') {
+const renderCountry = function (data, className = '') {
   const name = data.name.common;
   const flag = data.flags.svg;
   const region = data.region;
-  const languages = Object.values(data.languages)[0];
-  const currencies = Object.values(data.currencies)[0].name;
+  const language = Object.values(data.languages)[0];
+  const currency = Object.values(data.currencies)[0].name;
 
   const html = `
   <article class="country ${className}">
-  <img class="country__img" src="${flag}" />
-  <div class="country__data">
-    <h3 class="country__name">${name}</h3>
-    <h4 class="country__region">${region}</h4>
-    <p class="country__row"><span>👫</span>${(
-      +data.population / 1000000
-    ).toFixed(1)}M people</p>
-    <p class="country__row"><span>🗣️</span>${languages}</p>
-    <p class="country__row"><span>💰</span>${currencies}</p>
-  </div>
-</article>
+    <img class="country__img" src="${flag}" />
+    <div class="country__data">
+      <h3 class="country__name">${name}</h3>
+      <h4 class="country__region">${region}</h4>
+      <p class="country__row"><span>👫</span>${(
+        +data.population / 1000000
+      ).toFixed(1)} people</p>
+      <p class="country__row"><span>🗣️</span>${language}</p>
+      <p class="country__row"><span>💰</span>${currency}</p>
+    </div>
+  </article>
   `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  // countriesContainer.style.opacity = 1;
-}
+  countriesContainer.style.opacity = 1;
+};
 
-function renderError(mgs) {
-  countriesContainer.insertAdjacentText('beforeend', mgs);
-  // countriesContainer.style.opacity = 1;
-}
+const renderError = function (msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  countriesContainer.style.opacity = 1;
+};
+
+const getJSON = function (url, errorMsg = 'Something went wrong') {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+
+    return response.json();
+  });
+};
 
 ///////////////////////////////////////
 // AJAX-CALL
@@ -108,7 +116,7 @@ getCountryAndNeighbour('italy');
 // getCountryAndNeighbour('austria');
 
 
-*/
+
 ///////////////////////////////////////
 // PROMISES AND FETCH API, HANDLING ERRORS
 /////////////////////////////////////
@@ -201,7 +209,7 @@ Promise.resolve('Immediately resolved promise').then(x => console.log(x));
 
 
 
-*/
+
 
 function getPosition() {
   return new Promise(function (resolve, reject) {
@@ -239,5 +247,36 @@ function whereAmI() {
     })
     .catch(error => console.error(`${error.message} 💥`));
 }
+
+btn.addEventListener('click', whereAmI);
+
+
+
+*/
+// Async/Await
+function getPostition() {
+  return new Promise((resolve, reject) =>
+    navigator.geolocation.getCurrentPosition(resolve, reject)
+  );
+}
+
+const whereAmI = async function () {
+  // Geolocation
+  const position = await getPostition();
+  const { latitude: lat, longitude: lng } = position.coords;
+
+  // Reverse geocoding
+  const responseGeo = await fetch(
+    `https://geocode.xyz/${lat},${lng}?geoit=json`
+  );
+  const dataGeo = await responseGeo.json();
+
+  // Country data
+  const response = await fetch(
+    `https://restcountries.com/v3.1/name/${dataGeo.country}`
+  );
+  const data = await response.json();
+  renderCountry(data[0]);
+};
 
 btn.addEventListener('click', whereAmI);
