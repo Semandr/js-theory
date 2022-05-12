@@ -252,7 +252,6 @@ btn.addEventListener('click', whereAmI);
 
 
 
-*/
 // Async/Await
 function getPostition() {
   return new Promise((resolve, reject) =>
@@ -299,3 +298,22 @@ console.log(`1: Will get location`);
   }
   console.log(`3: Finished getting location`);
 })();
+
+
+
+*/
+
+// Running promises in parallel
+const get3Countries = async function (c1, c2, c3) {
+  try {
+    const data = await Promise.all([
+      getJSON(`https://restcountries.com/v3.1/name/${c1}`),
+      getJSON(`https://restcountries.com/v3.1/name/${c2}`),
+      getJSON(`https://restcountries.com/v3.1/name/${c3}`),
+    ]);
+    console.log(data.flatMap(d => d[0].capital));
+  } catch (error) {
+    console.error(error);
+  }
+};
+get3Countries('ukraine', 'italy', 'Canada');
